@@ -1,0 +1,28 @@
+{% extends "text_base.html" %}
+
+{% block title_text %}研判记录{% endblock %}
+{% block subtitle %}在逃人员身份研判记录表{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>研判内容</th>
+                <th>研判人</th>
+                <th>创建时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ypjl in page_obj %}
+                <tr data-ztrybh="{{ ypjl.ztrybh }}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ypjl.ztrybh }}</td>
+                    <td>{{ ypjl.ypnr }}</td>
+                    <td>{{ ypjl.ypr }}</td>
+                    <td>{{ ypjl.create_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

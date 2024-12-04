@@ -1,0 +1,36 @@
+{% extends "text_base.html" %}
+
+{% block title %}抓获战果{% endblock %}
+{% block subtitle %}在逃人员抓获战果信息表{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>上网单位</th>
+                <th>上网时间</th>
+                <th>抓获单位</th>
+                <th>撤销时间</th>
+                <th>分值</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zhzg in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ zhzg.ztrybh }}</td>
+                    <td>{{ zhzg.name|default:"" }}</td>
+                    <td>{{ zhzg.id_card|default:"" }}</td>
+                    <td>{{ zhzg.swdw|default:"" }}</td>
+                    <td>{{ zhzg.swsj|date:"Y-m-d" }}</td>
+                    <td>{{ zhzg.zhdw|default:"" }}</td>
+                    <td>{{ zhzg.cxsj|date:"Y-m-d" }}</td>
+                    <td>{{ zhzg.fz|default:"" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Clock</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+.clock {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #61c5d6;
+    box-shadow: 0px 0px 10px 1.5px #444 inset;
+    border-radius: 105px;
+    position: relative;
+    margin: 20px auto;
+    background-color: #f6f6f6;
+}
+.clock-num {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    position: absolute;
+    color: #555;
+    font-family: Arial, sans-serif;
+}
+.clock-line {
+    position: absolute;
+}
+.hour-line {
+    width: 50px;
+    height: 2px;
+    top: 98px;
+    left: 100px;
+    background-color: #000;
+    transform-origin: 0 50%;
+    border-radius: 1px;
+}
+.minute-line {
+    width: 65px;
+    height: 1px;
+    top: 99px;
+    left: 95px;
+    background-color: #000;
+    transform-origin: 3.846% 50%;
+}
+.second-line {
+    width: 85px;
+    height: 0.5px;
+    top: 99.5px;
+    left: 90px;
+    background-color: #f60;
+    transform-origin: 5.882% 50%;
+}
+.origin {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    top: 95px;
+    left: 95px;
+}
+.date-info {
+    width: 160px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    position: absolute;
+    top: 120px; /* 调整日期位置，使其靠下 */
+    left: 20px;
+    color: #555;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+.clock-scale {
+    width: 97.5px;
+    height: 1px;
+    transform-origin: 0% 50%;
+    position: absolute;
+    top: 99px;
+    left: 100px;
+}
+.scale-show {
+    width: 6px;
+    height: 1px;
+    background-color: #555;
+    float: left;
+}
+.scale-hidden {
+    width: 91.5px;
+    height: 1px;
+    float: left;
+}
+</style>
+</head>
+<body>
+<div class="clock" id="clock">
+    <div class="origin"></div>
+    <div class="clock-line hour-line" id="hour-line"></div>
+    <div class="clock-line minute-line" id="minute-line"></div>
+    <div class="clock-line second-line" id="second-line"></div>
+    <div class="date-info" id="date-info"></div>
+</div>
+
+<script>
+(function() {
+    window.onload = initClockNumbers(100, 80, 20, 20);
+
+    var hourLine = document.getElementById("hour-line");
+    var minuteLine = document.getElementById("minute-line");
+    var secondLine = document.getElementById("second-line");
+    var dateInfo = document.getElementById("date-info");
+    
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        
+        var hourAngle = (hours % 12) * 30 + minutes * 0.5 - 90;
+        var minuteAngle = minutes * 6 - 90;
+        var secondAngle = seconds * 6 - 90;
+        
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day = String(now.getDate()).padStart(2, '0');
+        
+        hourLine.style.transform = 'rotate(' + hourAngle + 'deg)';
+        minuteLine.style.transform = 'rotate(' + minuteAngle + 'deg)';
+        secondLine.style.transform = 'rotate(' + secondAngle + 'deg)';
+        
+        dateInfo.textContent = `${year}-${month}-${day}`; // 显示日期
+    }
+    setInterval(updateTime, 1000);
+
+    function initClockNumbers(R, r, w, h) {
+        var numXY = [
+            {"left": R + 0.5 * r - 0.5 * w, "top": R - 0.5 * r * 1.73205 - 0.5 * h},
+            {"left": R + 0.5 * r * 1.73205 - 0.5 * w, "top": R - 0.5 * r - 0.5 * h},
+            {"left": R + r - 0.5 * w, "top": R - 0.5 * h},
+            {"left": R + 0.5 * r * 1.73205 - 0.5 * w, "top": R + 0.5 * r - 0.5 * h},
+            {"left": R + 0.5 * r - 0.5 * w, "top": R + 0.5 * r * 1.732 - 0.5 * h},
+            {"left": R - 0.5 * w, "top": R + r - 0.5 * h},
+            {"left": R - 0.5 * r - 0.5 * w, "top": R + 0.5 * r * 1.732 - 0.5 * h},
+            {"left": R - 0.5 * r * 1.73205 - 0.5 * w, "top": R + 0.5 * r - 0.5 * h},
+            {"left": R - r - 0.5 * w, "top": R - 0.5 * h},
+            {"left": R - 0.5 * r * 1.73205 - 0.5 * w, "top": R - 0.5 * r - 0.5 * h},
+            {"left": R - 0.5 * r - 0.5 * w, "top": R - 0.5 * r * 1.73205 - 0.5 * h},
+            {"left": R - 0.5 * w, "top": R - r - 0.5 * h}
+        ];
+        
+        var clock = document.getElementById("clock");
+        for (var i = 1; i <= 12; i++) {
+            var numElem = document.createElement("div");
+            numElem.className = "clock-num";
+            numElem.textContent = i;
+            numElem.style.left = numXY[i - 1].left + 'px';
+            numElem.style.top = numXY[i - 1].top + 'px';
+            clock.appendChild(numElem);
+        }
+        for (var i = 0; i < 60; i++) {
+            var scale = document.createElement("div");
+            scale.className = "clock-scale";
+            scale.style.transform = 'rotate(' + i * 6 + 'deg)';
+            scale.innerHTML = `<div class="scale-hidden"></div><div class="scale-show"></div>`;
+            clock.appendChild(scale);
+        }
+    }
+})();
+</script>
+</body>
+</html>

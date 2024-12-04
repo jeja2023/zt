@@ -1,0 +1,36 @@
+{% extends "text_base.html" %}
+
+{% block title %}研判战果{% endblock %}
+{% block subtitle %}在逃人员研判战果信息表{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>上网日期</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>上网单位</th>
+                <th>上报单位</th>
+                <th>线索范围</th>
+                <th>分值</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ypzg in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ypzg.ztrybh }}</td>
+                    <td>{{ ypzg.swsj|date:"Y-m-d" }}</td>
+                    <td>{{ ypzg.name|default:"" }}</td>
+                    <td>{{ ypzg.id_card|default:"" }}</td>
+                    <td>{{ ypzg.swdw|default:"" }}</td>
+                    <td>{{ ypzg.sbdw|default:"" }}</td>
+                    <td>{{ ypzg.xsfw|default:"" }}</td>
+                    <td>{{ ypzg.fz|default:"" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

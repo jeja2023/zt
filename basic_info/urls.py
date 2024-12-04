@@ -1,0 +1,46 @@
+from django.urls import path
+from basic_info import views
+
+app_name = 'basic_info'
+
+urlpatterns = [
+    path('zt/', views.zt, name='zt'),
+    path('cx/', views.cx, name='cx'),
+    path('yz/', views.yz, name='yz'),
+    path('bs/', views.bs, name='bs'),
+    path('gxr/', views.gxr, name='gxr'),
+    path('ypjl/', views.ypjl, name='ypjl'),
+    path('sfyj/', views.sfyj, name='sfyj'),
+    path('sw/', views.sw, name='sw'),
+    path('jt/', views.jt, name='jt'),
+    path('dt/', views.dt, name='dt'),
+    path('ypbg/', views.ypbg, name='ypbg'),
+    path('add_ypbg/', views.add_ypbg, name='add_ypbg'),
+    path('ypzg/', views.ypzg, name='ypzg'),
+    path('zhzg/', views.zhzg, name='zhzg'),
+    path('zgtj/', views.zgtj, name='zgtj'),
+    path('ypdb/', views.ypdb, name='ypdb'),
+    path('attention/', views.attention, name='attention'),
+    path('gz_cancel/<str:pk>/', views.gz_cancel, name='gz_cancel'),
+    path('add_attention/<str:pk>/', views.add_attention, name='add_attention'),
+    path('cancel_attention/<str:pk>/', views.cancel_attention, name='cancel_attention'),
+    path('details/<str:pk>/', views.details, name='details'),
+    path('basic_details/<str:pk>/', views.basic_details, name='basic_details'),
+    path('gxr_details/<str:pk>/', views.gxr_details, name='gxr_details'),
+    path('ypjl_details/<str:pk>/', views.ypjl_details, name='ypjl_details'),
+    path('add_ypjl/<str:pk>/', views.add_ypjl, name='add_ypjl'),
+    path('view_ypjl/<str:pk>/', views.view_ypjl, name='view_ypjl'),
+    path('sfyj_details/<str:pk>/', views.sfyj_details, name='sfyj_details'),
+    path('sw_details/<str:pk>/', views.sw_image_details, name='sw_image_details'),
+    path('jt_details/<str:pk>/', views.jt_image_details, name='jt_image_details'),
+    path('dt_details/<str:pk>/', views.dt_image_details, name='dt_image_details'),
+    path('update_sw_cz/', views.update_sw_cz, name='update_sw_cz'),
+    path('update_jt_cz/', views.update_jt_cz, name='update_jt_cz'),
+    path('update_dt_cz/', views.update_dt_cz, name='update_dt_cz'),
+    path('update_basic_zt/', views.update_basic_zt, name='update_basic_zt'),
+    path('zt_filter/', views.zt_filter, name='zt_filter'),
+    path('yz_filter/', views.yz_filter, name='yz_filter'),
+    path('bs_filter/', views.bs_filter, name='bs_filter'),
+    path('cx_filter/', views.cx_filter, name='cx_filter'),
+
+]

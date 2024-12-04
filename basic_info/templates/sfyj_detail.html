@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>身份信息预警</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* 设置字体 */
+            background-color: #f4f4f4; /* 背景颜色 */
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4c78ad; /* 顶部背景色 */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            font-size: 60px; /* 系统名称字体大小 */
+            margin: 0;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 24px; /* 副标题字体大小 */
+            margin: 10px 0 0; /* 副标题与系统名称间距 */
+        }
+        .title {
+            font-size: 35px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff; /* 表格背景颜色 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px; /* 增加内边距 */
+            text-align: center;
+            font-size: 16px;
+        }
+        th {
+            background-color: #4c78ad; /* 表头背景颜色 */
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* 偶数行背景颜色 */
+        }
+        tr:hover {
+            background-color: #f1f1f1; /* 鼠标悬停效果 */
+        }
+        /* 固定在右下角的分页样式 */
+        .pagination {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+            z-index: 100;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #e9e9e9;
+            transform: scale(1.05); /* 添加按钮悬停缩放效果 */
+        }
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .pagination a.disabled {
+            background-color: #f0f0f0;
+            color: #ccc;
+            pointer-events: none;
+        }
+        img {
+            max-width: 50px; /* 设置图片的最大宽度 */
+            max-height: 50px; /* 设置图片的最大高度 */
+            object-fit: cover; /* 保持图片的比例 */
+            border-radius: 5px; /* 圆角效果 */
+        }
+
+    </style>
+</head>
+<body>
+<h1>身份预警</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>在逃编号</th>
+                    <th>上网日期</th>
+                    <th>姓名</th>
+                    <th>身份证号码</th>
+                    <th>活动时间</th>
+                    <th>数据来源</th>
+                    <th>预警信息</th>
+                    <th>处置</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sfyj in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ sfyj.ztrybh }}</td>
+                        <td>{{ sfyj.swsj }}</td>
+                        <td>{{ sfyj.name }}</td>
+                        <td>{{ sfyj.id_card }}</td>
+                        <td>{{ sfyj.hdsj }}</td>
+                        <td>{{ sfyj.sjly }}</td>
+                        <td>{{ sfyj.yjxx }}</td>
+                        <td>{{ sfyj.cz }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">首页</a>
+                <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            {% endif %}
+            <span class="current">
+                页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">尾页</a>
+            {% endif %}
+        </div>
+</body>
+</html>

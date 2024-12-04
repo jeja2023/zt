@@ -1,0 +1,58 @@
+{% extends "text_base.html" %}
+
+{% block title %}研判到期{% endblock %}
+{% block subtitle %}在逃人员研判到期信息表{% endblock %}
+
+{% block content %}
+    {% if reminders %}
+        <div class="reminder">
+            <h3>提醒事项</h3>
+            <ul>
+                {% for reminder in reminders %}
+                    <p><span style="color: red;">{{ reminder }}</span></p>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>上网日期</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>上网单位</th>
+                <th>上报单位</th>
+                <th>上报时间</th>
+                <th>到期时间</th>
+                <th>战果单位</th>
+                <th>分值</th>
+                <th>战果认定</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ypdb in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ypdb.ztrybh }}</td>
+                    <td>{{ ypdb.swsj|date:"Y-m-d" }}</td>
+                    <td>{{ ypdb.name }}</td>
+                    <td>{{ ypdb.id_card }}</td>
+                    <td>{{ ypdb.swdw }}</td>
+                    <td>{{ ypdb.sbdw }}</td>
+                    <td>{{ ypdb.sbsj|date:"Y-m-d H:i:s" }}</td>
+                    <td class="{% if ypdb.dqsj and ypdb.dqsj.date == today %}red{% endif %}">{{ ypdb.dqsj|date:"Y-m-d H:i:s" }}</td>  <!-- 标红处理 -->
+                    <td>{{ ypdq.zgdw }}</td>
+                    <td>{{ ypdq.fz }}</td>
+                    <td>{{ ypdq.zg }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="14">没有找到结果。</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

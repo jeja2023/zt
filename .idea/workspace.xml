@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="250953b9-889f-46f9-9170-944d3756e915" name="更改" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2nCJcbd6Km3xTFqRLsS4ory7l05" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django 服务器.ztry.executor": "Run",
+    "JavaScript 调试.add_ypbg.html.executor": "Run",
+    "JavaScript 调试.basic_info_list.html.executor": "Run",
+    "JavaScript 调试.chart_example.html.executor": "Run",
+    "JavaScript 调试.cx.html.executor": "Run",
+    "JavaScript 调试.detail.html.executor": "Run",
+    "JavaScript 调试.dt_detail.html.executor": "Run",
+    "JavaScript 调试.home.html.executor": "Run",
+    "JavaScript 调试.image_list.html.executor": "Run",
+    "JavaScript 调试.img_base.html.executor": "Run",
+    "JavaScript 调试.index.html (1).executor": "Run",
+    "JavaScript 调试.index.html.executor": "Run",
+    "JavaScript 调试.jt.html.executor": "Run",
+    "JavaScript 调试.jt_detail.html.executor": "Run",
+    "JavaScript 调试.login.html.executor": "Run",
+    "JavaScript 调试.register.html.executor": "Run",
+    "JavaScript 调试.sfyj.html.executor": "Run",
+    "JavaScript 调试.sfyj_detail.html.executor": "Run",
+    "JavaScript 调试.sw_image.html.executor": "Run",
+    "JavaScript 调试.yj_detail.html.executor": "Run",
+    "JavaScript 调试.zgtj.html.executor": "Run",
+    "JavaScript 调试.zt.html.executor": "Run",
+    "Python.javascript.executor": "Run",
+    "Python.settings.executor": "Run",
+    "Python.views.executor": "Run",
+    "Python.云鉴自动比对(DrissionPage).executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "full.screen.before.presentation.mode": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/project/djangoProject/ztry",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\project\ztry\basic_info\templates" />
+      <recent name="D:\project\djangoProject\ztry\basic_info\templates" />
+      <recent name="D:\project\djangoProject\ztry\basic_info\static\css" />
+      <recent name="D:\project\djangoProject\ztry\templates" />
+      <recent name="D:\project\djangoProject\ztry\login" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\djangoProject\ztry\basic_info\static\css" />
+      <recent name="D:\project\djangoProject\ztry" />
+      <recent name="D:\project\djangoProject\ztry\basic_info\static\js" />
+      <recent name="D:\project\djangoProject\ztry\basic_info\static" />
+      <recent name="D:\project\djangoProject\ztry\basic_info" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django 服务器.ztry">
+    <configuration name="chart_example.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ztry/basic_info/templates/chart_example.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="home.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ztry/basic_info/templates/home.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ztry/basic_info/templates/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="zgtj.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ztry/basic_info/templates/zgtj.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="云鉴自动比对(DrissionPage)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ztry" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../python程序" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../python程序/云鉴自动比对(DrissionPage).py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ztry" type="Python.DjangoServer" factoryName="Django server">
+      <module name="ztry" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="ztry.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.云鉴自动比对(DrissionPage)" />
+        <item itemvalue="JavaScript 调试.chart_example.html" />
+        <item itemvalue="JavaScript 调试.zgtj.html" />
+        <item itemvalue="JavaScript 调试.home.html" />
+        <item itemvalue="JavaScript 调试.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-PY-242.20224.347" />
+        <option value="bundled-python-sdk-c2d6afa66fbe-39cff9de6eef-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.20224.347" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="250953b9-889f-46f9-9170-944d3756e915" name="更改" comment="" />
+      <created>1728471204984</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728471204984</updated>
+      <workItem from="1728471208388" duration="20303000" />
+      <workItem from="1728529292040" duration="1954000" />
+      <workItem from="1728538021595" duration="1819000" />
+      <workItem from="1728541701220" duration="1176000" />
+      <workItem from="1728542907080" duration="60633000" />
+      <workItem from="1728811999191" duration="19449000" />
+      <workItem from="1728870868897" duration="18544000" />
+      <workItem from="1728954020077" duration="7533000" />
+      <workItem from="1728961596523" duration="85555000" />
+      <workItem from="1729214651114" duration="26569000" />
+      <workItem from="1729241928290" duration="431000" />
+      <workItem from="1729305303266" duration="39953000" />
+      <workItem from="1729503451057" duration="12569000" />
+      <workItem from="1729516067825" duration="1842000" />
+      <workItem from="1729517953512" duration="2511000" />
+      <workItem from="1729556746952" duration="71000" />
+      <workItem from="1729556834289" duration="61740000" />
+      <workItem from="1729747508462" duration="4508000" />
+      <workItem from="1729752051548" duration="59592000" />
+      <workItem from="1730077794968" duration="21240000" />
+      <workItem from="1730102013025" duration="23701000" />
+      <workItem from="1730195556238" duration="367000" />
+      <workItem from="1730195978738" duration="38496000" />
+      <workItem from="1730273709642" duration="14773000" />
+      <workItem from="1730346845296" duration="685000" />
+      <workItem from="1730347970510" duration="1078000" />
+      <workItem from="1730349401566" duration="663000" />
+      <workItem from="1730535611234" duration="29105000" />
+      <workItem from="1730712011194" duration="67200000" />
+      <workItem from="1731312084885" duration="11997000" />
+      <workItem from="1731400518171" duration="27607000" />
+      <workItem from="1732004216071" duration="65462000" />
+      <workItem from="1732582035504" duration="46132000" />
+      <workItem from="1733316591034" duration="4966000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ztry$settings.coverage" NAME="settings 覆盖结果" MODIFIED="1728814717154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ztry" />
+    <SUITE FILE_PATH="coverage/ztry$javascript.coverage" NAME="javascript 覆盖结果" MODIFIED="1728815709216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic_info" />
+    <SUITE FILE_PATH="coverage/ztry$views.coverage" NAME="views 覆盖结果" MODIFIED="1731655722854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/basic_info" />
+    <SUITE FILE_PATH="coverage/ztry$_DrissionPage_.coverage" NAME="云鉴自动比对(DrissionPage) 覆盖结果" MODIFIED="1732084635450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../python程序" />
+  </component>
+</project>

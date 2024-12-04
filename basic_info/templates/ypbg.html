@@ -1,0 +1,49 @@
+{% extends "text_base.html" %}
+
+{% block title %}研判报告{% endblock %}
+{% block subtitle %}在逃人员研判上报信息表{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>上网单位</th>
+                <th>上网时间</th>
+                <th>上报单位</th>
+                <th>上报时间</th>
+                <th>到期时间</th>
+                <th>抓获单位</th>
+                <th>抓获时间</th>
+                <th>撤销时间</th>
+                <th>线索范围</th>
+                <th>分值</th>
+                <th>战果认定</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ypbg in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ypbg.ztrybh }}</td>
+                    <td>{{ ypbg.name|default:"" }}</td>
+                    <td>{{ ypbg.id_card|default:"" }}</td>
+                    <td>{{ ypbg.swdw|default:"" }}</td>
+                    <td>{{ ypbg.swsj|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ ypbg.sbdw|default:"" }}</td>
+                    <td>{{ ypbg.sbsj|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ ypbg.dqsj|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ ypbg.zhdw|default:"" }}</td>
+                    <td>{{ ypbg.zhsj|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ ypbg.cxsj|default:"" }}</td>
+                    <td>{{ ypbg.xsfw|default:"" }}</td>
+                    <td>{{ ypbg.fz|default:"" }}</td>
+                    <td>{{ ypbg.zg|default:"" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

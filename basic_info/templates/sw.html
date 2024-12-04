@@ -1,0 +1,74 @@
+{% extends 'img_base.html' %}
+
+{% block title %}上网照片{% endblock %}
+
+{% block content %}
+    <h1>在逃人员上网照片</h1>
+    <div class="image-gallery">
+        {% for image in page_obj %}
+            <div class="image-item">
+                <div class="image-name">{{ image.ztrybh }}  (id:{{ image.id }})</div><br>
+                <img src="/image/{{ image.swzp }}" alt="{{ image.ztrybh }}" width="150px" height="170px" /><br>
+                <button class="button exclude" data-id="{{ image.id }}" data-action="exclude">非本人</button>
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelectorAll('.button');
+
+            button.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    updateDatabase(event.target);
+                });
+            });
+        });
+
+        function updateDatabase(button) {
+            const imageId = button.getAttribute('data-id');
+            const action = button.getAttribute('data-action');
+
+            // 弹出确认对话框
+            const confirmed = confirm('您确定要进行此操作吗？');
+
+            if (!confirmed) {
+                return; // 如果用户点击取消，直接返回，不进行后续操作
+            }
+            button.disabled = true;
+            button.innerText = '处理中...';
+
+            fetch('/info/update_sw_cz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ id:imageId, action })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('状态更新成功！');
+                    window.location.reload();
+                } else {
+                    alert('更新状态时出错，请重试。');
+                    button.disabled = false; // 恢复按钮状态
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('网络错误，请稍后再试。');
+                button.disabled = false; // 恢复按钮状态
+            });
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+
+            if (parts.length === 2) {
+                return parts.pop().split(';').shift();
+            }
+        }
+    </script>
+{% endblock %}

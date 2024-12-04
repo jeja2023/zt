@@ -1,0 +1,172 @@
+{% extends "text_base.html" %}
+
+<title>{% block title %}身份预警{% endblock %}</title>
+{% block subtitle %}在逃人员身份预警信息表{% endblock %}
+
+{% block content %}
+    <style>
+    .yjxx-container {
+        display: flex;
+        justify-content: space-between; /* 将文本和按钮分开 */
+        align-items: center; /* 垂直居中对齐 */
+        width: 100%; /* 容器宽度自动扩展 */
+    }
+
+    .yjxx-text {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex-grow: 1; /* 使文本部分占据剩余空间 */
+    }
+
+    .toggle-btn {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 12px;
+        cursor: pointer;
+        margin-left: 10px; /* 按钮与文本之间的间距 */
+    }
+
+    .toggle-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .yjxx-expanded {
+        white-space: pre-wrap; /* 允许文本换行 */
+        word-wrap: break-word; /* 允许单词断行 */
+        max-width: 100%; /* 确保容器不会超过父容器的宽度 */
+        line-height: 1.4; /* 行高增加，便于显示 */
+    }
+
+    .yjxx-container p {
+        margin: 0;
+    }
+    </style>
+
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>上网日期</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>活动时间</th>
+                <th>数据来源</th>
+                <th>预警信息</th>
+                <th>处置</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sfyj in page_obj %}
+                <tr data-ztrybh="{{ sfyj.ztrybh }}">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ sfyj.ztrybh }}</td>
+                    <td>{{ sfyj.swsj|date:"Y-m-d" }}</td>
+                    <td>{{ sfyj.name }}</td>
+                    <td>{{ sfyj.id_card }}</td>
+                    <td>{{ sfyj.hdsj|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ sfyj.sjly }}</td>
+                    <td>
+                        <div class="yjxx-container">
+                            <p id="yjxx-preview-{{ sfyj.ztrybh }}" class="yjxx-text">
+                                {{ sfyj.yjxx|slice:":50" }}{% if sfyj.yjxx|length > 50 %}...{% endif %}
+                            </p>
+                            {% if sfyj.yjxx|length > 50 %}
+                            <button id="toggle-yjxx-{{ sfyj.ztrybh }}" class="toggle-btn" onclick="toggleYjxx('{{ sfyj.ztrybh }}', '{{ sfyj.yjxx|escapejs }}')">展开</button>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>
+                        {% if sfyj.cz == '已抓获' %}
+                            <button data-ztrybh="{{ sfyj.ztrybh }}" class="cz_button" disabled>已抓获</button>
+                        {% else %}
+                            <button data-ztrybh="{{ sfyj.ztrybh }}" onclick="handleDisposition('{{ sfyj.ztrybh }}')" class="cz_button">处置</button>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+    function handleDisposition(ztrybh) {
+        if (confirm('是否选择已抓获？')) {
+            updateDisposition(ztrybh, '已抓获');
+        }
+    }
+
+    function updateDisposition(ztrybh, disposition) {
+        fetch('/info/update_basic_zt/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ztrybh: ztrybh, disposition: disposition})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelectorAll(`tr[data-ztrybh="${ztrybh}"]`).forEach(row => {
+                    row.querySelector('td:nth-child(9)').innerText = '已抓获'; // 假设cz在第九列
+                });
+                document.querySelectorAll(`button[data-ztrybh="${ztrybh}"]`).forEach(button => {
+                    button.innerText = '已抓获';
+                    button.disabled = true;
+                    button.style.backgroundColor = '#6c757d'; // 使按钮变暗
+                });
+                location.reload();
+            } else {
+                alert('状态更新失败');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function toggleYjxx(ztrybh, fullYjxx) {
+        const previewElement = document.getElementById(`yjxx-preview-${ztrybh}`);
+        const toggleButton = document.getElementById(`toggle-yjxx-${ztrybh}`);
+
+        if (toggleButton.innerText === '展开') {
+            previewElement.innerText = fullYjxx;
+            previewElement.classList.add('yjxx-expanded');
+            toggleButton.innerText = '收起';
+        } else {
+            previewElement.innerText = fullYjxx.slice(0, 50) + '...';
+            previewElement.classList.remove('yjxx-expanded');
+            toggleButton.innerText = '展开';
+        }
+    }
+
+    function formatText(text, maxLength) {
+    // 将文本每100个字符插入一个换行符
+    const lines = [];
+    for (let i = 0; i < text.length; i += maxLength) {
+        lines.push(text.slice(i, i + maxLength));
+    }
+    return lines.join('\n');
+}
+    </script>
+{% endblock %}

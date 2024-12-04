@@ -1,0 +1,63 @@
+{% extends "basic_base.html" %}
+
+{% block title %}本市在逃{% endblock %}
+{% block subtitle %}本市在逃人员信息表{% endblock %}
+{% block table_content %}
+    <form method="GET" action="{% url 'basic_info:bs_filter' %}">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <p>在逃人员编号:
+                <input type="text" name="ztrybh" value="{{ form.ztrybh.value|default:'' }}">
+            </p>
+            <p>姓名:
+                <input type="text" name="name" value="{{ form.name.value|default:'' }}">
+            </p>
+            <p>身份证号码:
+                <input type="text" name="id_card" value="{{ form.id_card.value|default:'' }}">
+            </p>
+            <p>案件类别:
+                <input type="text" name="ajlb" value="{{ form.ajlb.value|default:'' }}">
+            </p>
+            <p>上网单位:
+                <input type="text" name="swdw" value="{{ form.swdw.value|default:'' }}">
+            </p>
+            <p>上网时间:
+                <input type="text" name="swsj" value="{{ form.swsj.value|default:'' }}">
+            </p>
+            <button type="submit" style="background-color: #007afd; color:white; line-height: 1;margin-top:12px;width:80px; height:30px;font-size: 16px;" >查询</button>
+        </div>
+
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃人员编号</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>案件类别</th>
+                <th>上网单位</th>
+                <th>上网时间</th>
+                <th>详情</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ obj.ztrybh }}</td>
+                    <td>{{ obj.name|default:"" }}</td>
+                    <td>{{ obj.id_card|default:"" }}</td>
+                    <td>{{ obj.ajlb|default:"" }}</td>
+                    <td>{{ obj.swdw|default:"" }}</td>
+                    <td>{{ obj.swsj|date:"Y-m-d H:i:s" }}</td>
+                    <td><a href="{% url 'basic_info:details' pk=obj.pk %}" target="_blank">查看</a></td>
+                </tr>
+            {% empty %}
+            <tr>
+                <td colspan="14">没有找到结果。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

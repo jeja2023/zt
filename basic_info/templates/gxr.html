@@ -1,0 +1,32 @@
+{% extends "text_base.html" %}
+
+<title>{% block title %}在逃关系人{% endblock %}</title>
+{% block subtitle %}在逃人员关系人信息表{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>在逃编号</th>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>关系人姓名</th>
+                <th>关系人身份证号码</th>
+                <th>关系人与户主关系</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gxr in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ gxr.ztrybh }}</td>
+                    <td>{{ gxr.name }}</td>
+                    <td>{{ gxr.id_card }}</td>
+                    <td>{{ gxr.gxr_name }}</td>
+                    <td>{{ gxr.gxr_id }}</td>
+                    <td>{{ gxr.hzgx }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "text_base.html" %}
+
+{% block title %}追逃战果{% endblock %}
+{% block subtitle %}追逃战果信息表{% endblock %}
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>战果单位</th>
+                <th>研判战果分值</th>
+                <th>抓获战果分值</th>
+                <th>战果总分值</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for zgtj in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ zgtj.zgdw }}</td>
+                    <td>{{ zgtj.total_ypzg|default:0 }}</td>
+                    <td>{{ zgtj.total_zhzg|default:0 }}</td>
+                    <td>{{ zgtj.total_score|default:0 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

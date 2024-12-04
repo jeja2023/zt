@@ -1,0 +1,50 @@
+{% extends "basic_base.html" %}
+
+{% block title %}关注在逃{% endblock %}
+{% block subtitle %}关注在逃人员信息{% endblock %}
+
+{% block table_content %}
+<table>
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>在逃人员编号</th>
+            <th>姓名</th>
+            <th>身份证号码</th>
+            <th>户籍地址</th>
+            <th>案件类别</th>
+            <th>上网单位</th>
+            <th>上网时间</th>
+            <th>状态</th>
+            <th>详情</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in page_obj %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ obj.ztrybh }}</td>
+                <td>{{ obj.basic_info.name }}</td>
+                <td>{{ obj.basic_info.id_card }}</td>
+                <td>{{ obj.basic_info.hjdz }}</td>
+                <td>{{ obj.basic_info.ajlb }}</td>
+                <td>{{ obj.basic_info.swdw }}</td>
+                <td>{{ obj.basic_info.swsj|date:"Y-m-d" }}</td>
+                <td>{{ obj.basic_info.zt }}</td>
+                <td><a href="{% url 'basic_info:details' pk=obj.pk %}" target="_blank">查看</a></td>
+                <td>
+                    <form action="{% url 'basic_info:gz_cancel' obj.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="cancel-follow" type="submit">取消关注</button>
+                    </form>
+                </td>
+            </tr>
+        {% empty %}
+        <tr>
+            <td colspan="14">没有找到结果。</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

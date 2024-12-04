@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在逃人员档案</title>
+    <style>
+        /* 页面整体容器 */
+        .container {
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 左侧导航栏 */
+        .sidebar {
+            width: 220px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-right: 2px solid #ddd;
+            height: 100vh;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            background-color: #369ff4;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            margin-bottom: 15px;
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* 右侧内容区域 */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #fff;
+            height: calc(100vh - 80px);
+            width: 1000px;
+            overflow-y: auto;
+        }
+
+        /* 内容标题 */
+        h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* 分页样式 */
+        div {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        div a {
+            padding: 8px 15px;
+            margin: 0 5px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        div a:hover {
+            background-color: #0056b3;
+        }
+
+        div span {
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        /* 关注按钮样式 */
+        .follow-btn {
+            background-color: #31b369;
+            width: 50%;
+            margin-left: 50px;
+        }
+
+        .cancel-follow-btn {
+            background-color: #dc3545;
+            width: 60%;
+            margin-left: 40px;
+        }
+        hr {
+            width: 100%; /* 设置宽度 */
+            border: 0;  /* 移除默认的边框 */
+            border-top: 2px solid #000; /* 设置上边框，形成一条水平线 */
+            margin: 20px 0;  /* 设置上下间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>在逃人员综合研判平台</h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <button id="follow-btn" class="btn follow-btn" data-ztrybh="{{ pk }}">
+                {% if ztrybh.is_followed %}
+                    取消关注
+                {% else %}
+                    关注
+                {% endif %}
+            </button>
+            <hr>
+            <button id="show-ypjl" class="btn">研判记录</button>
+            <button id="show-basic" class="btn">基本信息</button>
+            <button id="show-gxr" class="btn">关系人员</button>
+            <button id="show-sfyj" class="btn">身份预警</button>
+            <button id="show-jt" class="btn">静态比对</button>
+            <button id="show-dt" class="btn">动态比对</button>
+        </div>
+
+        <!-- 右侧内容区域 -->
+        <div id="content-container" class="content">
+            <!-- 默认显示研判记录的内容 -->
+            <div id="ypjl-content">
+                {% include 'ypjl_detail.html' %}
+            </div>
+        </div>
+    </div>
+    <form method="POST" style="display:none;">
+        {% csrf_token %}
+    </form>
+    <!-- JavaScript部分 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 获取按钮并添加事件监听器
+            document.getElementById('show-ypjl').addEventListener('click', function() {
+                fetchContent('ypjl');
+            });
+            document.getElementById('show-basic').addEventListener('click', function() {
+                fetchContent('basic');
+            });
+            document.getElementById('show-gxr').addEventListener('click', function() {
+                fetchContent('gxr');
+            });
+            document.getElementById('show-sfyj').addEventListener('click', function() {
+                fetchContent('sfyj');
+            });
+            document.getElementById('show-jt').addEventListener('click', function() {
+                fetchContent('jt');
+            });
+            document.getElementById('show-dt').addEventListener('click', function() {
+                fetchContent('dt');
+            });
+
+            // 默认加载“研判记录”内容
+            fetchContent('ypjl');
+
+            // 根据选项加载不同内容
+            function fetchContent(type) {
+                const pk = {{ pk }};  // 当前对象的pk，传递给AJAX请求
+                const url = `/info/${type}_details/${pk}/`;  // 构建AJAX请求的URL
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',  // 标识为AJAX请求
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    // 更新页面内容
+                    document.getElementById('content-container').innerHTML = html;
+                })
+                .catch(error => console.error('Error fetching content:', error));
+            }
+
+            // 处理关注按钮点击事件
+            document.getElementById('follow-btn').addEventListener('click', function() {
+                const button = this;
+                const pk = button.getAttribute('data-ztrybh');
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                // 判断当前按钮的状态，并进行相应的 AJAX 请求
+                const action = button.textContent.trim() === '关注' ? 'add_attention' : 'cancel_attention';
+
+                fetch(`/info/${action}/${pk}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken, // 传递 CSRF Token
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ pk: pk })  // 传递对象的 pk
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // 更新按钮文本和样式
+                        if (data.action === 'followed') {
+                            button.textContent = '取消关注';
+                            button.classList.remove('follow-btn');
+                            button.classList.add('cancel-follow-btn');
+                        } else if (data.action === 'unfollowed') {
+                            button.textContent = '关注';
+                            button.classList.remove('cancel-follow-btn');
+                            button.classList.add('follow-btn');
+                        }
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>

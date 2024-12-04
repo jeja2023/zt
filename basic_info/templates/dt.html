@@ -1,0 +1,169 @@
+{% extends 'img_base.html' %}
+
+{% block title %}动态比对{% endblock %}
+
+{% block content %}
+    <h1>在逃人员动态比对照片</h1>
+    <div class="image-gallery">
+        {% for image in page_obj %}
+            <div class="image-item">
+                <div class="image-name">{{ image.ztrybh }} (id: {{ image.id }})</div><br>
+                <!-- 添加点击事件和放大图片的src -->
+                <img src="/image/{{ image.dtbd }}" alt="{{ image.ztrybh }}" width="150px" height="170px" onclick="openModal(this)" style="cursor: pointer;" /><br>
+                <button class="button exclude" data-id="{{ image.id }}" data-action="exclude">排除</button>
+                <button class="button captured" data-id="{{ image.id }}" data-action="captured">已抓获</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- 放大图片的模态框 -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.button');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    updateDatabase(event.target);
+                });
+            });
+        });
+
+        function updateDatabase(button) {
+            const imageId = button.getAttribute('data-id');
+            const action = button.getAttribute('data-action');
+
+            if (!confirm('您确定要进行此操作吗？')) {
+                return;
+            }
+
+            button.disabled = true;
+            button.innerText = '处理中...';
+
+            fetch('/info/update_dt_cz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ id: imageId, action }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('状态更新成功！');
+                        window.location.reload();
+                    } else {
+                        alert(`更新状态失败：${data.error}`);
+                        button.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('网络错误，请稍后再试。');
+                    button.disabled = false;
+                });
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            return parts.length === 2 ? parts.pop().split(';').shift() : null;
+        }
+
+        // 获取模态框元素
+        var modal = document.getElementById("myModal");
+        // 获取图片元素
+        var modalImg = document.getElementById("modalImg");
+        // 获取关闭按钮
+        var span = document.getElementsByClassName("close")[0];
+
+        // 点击图片时执行的函数
+        function openModal(img) {
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            modalImg.style.display = 'block'; // 确保图片显示
+            centerImage();
+        }
+
+        // 居中显示图片
+        function centerImage() {
+            var windowHeight = window.innerHeight;
+            var windowWidth = window.innerWidth;
+            var modalImgHeight = modalImg.offsetHeight;
+            var modalImgWidth = modalImg.offsetWidth;
+
+            var top = (windowHeight - modalImgHeight) / 2;
+            var left = (windowWidth - modalImgWidth) / 2;
+
+            if (top < 0) top = 0;
+            if (left < 0) left = 0;
+
+            modalImg.style.top = top + "px";
+            modalImg.style.left = left + "px";
+        }
+
+        // 点击关闭按钮时执行的函数
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // 点击模态框外部时关闭模态框
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <style>
+        .image-item img {
+            cursor: pointer; /* 鼠标悬停在图片上时显示指针 */
+        }
+
+        /* 放大图片的样式 */
+        .modal {
+            display: none; /* 默认不显示 */
+            position: fixed; /* 固定定位 */
+            z-index: 1; /* 置于顶层 */
+            left: 0;
+            top: 0;
+            width: 100%; /* 宽度100% */
+            height: 100%; /* 高度100% */
+            overflow: auto; /* 如果需要，可以滚动 */
+            background-color: rgb(0,0,0); /* 背景颜色 */
+            background-color: rgba(0,0,0,0.9); /* 黑色背景，0.9透明度 */
+        }
+
+        /* 放大图片的容器 */
+        .modal-content {
+            position: absolute;
+            display: none; /* 默认不显示 */
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* 关闭按钮 */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

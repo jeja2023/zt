@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上网图片</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            background-color: #4c78ad; /* 顶部背景色 */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            font-size: 60px; /* 系统名称字体大小 */
+            margin: 0;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 24px; /* 副标题字体大小 */
+            margin: 10px 0 0; /* 副标题与系统名称间距 */
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .image-item {
+            text-align: center;
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover; /* 保持图片的比例 */
+        }
+        .image-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        .image-name {
+            margin-top: 5px;
+            color: #333;
+        }
+
+        /* 固定在右下角的分页样式 */
+        .pagination {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+            z-index: 100;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #e9e9e9;
+            transform: scale(1.05); /* 添加按钮悬停缩放效果 */
+        }
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .pagination a.disabled {
+            background-color: #f0f0f0;
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .image-gallery {
+                justify-content: space-around;
+            }
+            .image-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>上网照片</h1>
+<div class="image-gallery">
+    {% for image in page_obj %}
+        <div class="image-item">
+            <div class="image-name">{{ image.ztrybh }}</div><br>
+            <img src="{{ image.swzp.url }}" alt="{{ image.ztrybh }}" />
+        </div>
+    {% endfor %}
+</div>
+
+<!-- 固定在右下角的分页链接 -->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; 第一页</a>
+            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+        <span class="current">
+            页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>

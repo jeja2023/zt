@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>研判记录详情</title>
+    <style>
+        .header {
+            background-color: #4c78ad; /* 顶部背景色 */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            font-size: 60px; /* 系统名称字体大小 */
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .content {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>在逃人员综合研判平台</h1>
+    </div>
+    <div class="container">
+        <h1>研判记录详情</h1>
+        <div class="content">
+            <p><strong>研判内容:</strong> {{ record.ypnr }}</p>
+
+            {% if record.yptp %}
+                <p><strong>上传图片:</strong></p>
+                <img src="{{ record.yptp.url }}" alt="上传图片" style="max-width: 100%;">
+            {% endif %}
+            <p><strong>研判人:</strong> {{ record.ypr }}</p>
+            <p><strong>上传时间:</strong> {{ record.create_at }}</p>
+        </div>
+    </div>
+</body>
+</html>
