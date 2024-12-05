@@ -2,10 +2,10 @@
 FROM python:3.12-slim
 
 # 设置工作目录
-WORKDIR /app
+WORKDIR /ztry
 
 # 复制项目文件
-COPY . /app/
+COPY . /ztry/
 
 # 安装系统依赖
 RUN apt-get update && apt-get install -y \
@@ -13,9 +13,16 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     default-libmysqlclient-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# 安装 pkg-config 和 MySQL 开发库
+RUN apt-get update && apt-get install -y pkg-config libmariadb-dev-compat libmariadb-dev
+
 # 安装 Python 依赖
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
+# 创建 staticfiles 目录
+RUN mkdir -p /ztry/staticfiles
 
 # 收集静态文件（如果项目有静态文件）
 RUN python manage.py collectstatic --noinput
